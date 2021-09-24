@@ -6,3 +6,19 @@
 .first_club {
   flex-direction: row;
 }
+
+.clubs {
+  border: 1px solid blueviolet;
+  width: 250px;
+}
+
+.main_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: 200px;
+  background-color: chartreuse;
+  margin-top: 20px;
+}

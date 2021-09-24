@@ -32,12 +32,15 @@ function App() {
   return (
     <div>
       <h1>Mis clubs</h1>
-      <ul>
+      <ul class="main_list">
         {data.map((club, index) => {
           return (
-            <li key={index}>
-              #:{index} {club.name} Abierto entre semana:
+            <li key={index} className="clubs">
+              #:{index} {club.name}
+              <br />
+              Abierto entre semana:
               {club.openOnWeekdays ? 'Sí' : 'No'}
+              <br />
               Abierto el fin de semana:
               {club.openOnWeekend ? 'Sí' : 'No'}
             </li>
@@ -80,6 +83,7 @@ function App() {
 
         <input
           type="button"
+          className="button"
           value="Añadir nuevo club"
           onClick={handleClickButton}
         />
