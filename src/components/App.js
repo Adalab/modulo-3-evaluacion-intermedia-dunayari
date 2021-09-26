@@ -1,22 +1,20 @@
 import '../styles/App.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import initialData from '../services/data.json';
 function App() {
   const [data, setData] = useState(initialData);
-  /*  const [newClub, setNewClub] = useState(''); */
-
   const [newName, setNewName] = useState('');
-  const [openWeekDays, setOpenWeekDays] = useState('');
-  const [openWeekendDays, setOpenWeekendDays] = useState('');
+  const [openWeekDays, setOpenWeekDays] = useState(false);
+  const [openWeekendDays, setOpenWeekendDays] = useState(false);
 
   const handleNewName = (ev) => {
-    setNewName(ev.currentTarget.value);
+    setNewName(ev.target.value);
   };
   const handleOpenWeekDays = (ev) => {
-    setOpenWeekDays(ev.currentTarget.value);
+    setOpenWeekDays(ev.target.checked);
   };
   const handleOpenWeekendDays = (ev) => {
-    setOpenWeekendDays(ev.currentTarget.value);
+    setOpenWeekendDays(ev.target.checked);
   };
 
   const handleClickButton = (ev) => {
@@ -28,29 +26,35 @@ function App() {
     };
     setData([...data, newContact]);
   };
+  const htmlClubList = () => {
+    return data.map((club, index) => {
+      return (
+        <li key={index} className="clubs">
+          <h2>
+            #:{index} {club.name}
+          </h2>
+          <p>
+            Abierto entre semana:
+            {club.openOnWeekdays ? 'Sí' : 'No'}
+          </p>
+
+          <p>
+            Abierto el fin de semana:
+            {club.openOnWeekend ? 'Sí' : 'No'}
+          </p>
+        </li>
+      );
+    });
+  };
 
   return (
     <div>
       <h1>Mis clubs</h1>
-      <ul class="main_list">
-        {data.map((club, index) => {
-          return (
-            <li key={index} className="clubs">
-              #:{index} {club.name}
-              <br />
-              Abierto entre semana:
-              {club.openOnWeekdays ? 'Sí' : 'No'}
-              <br />
-              Abierto el fin de semana:
-              {club.openOnWeekend ? 'Sí' : 'No'}
-            </li>
-          );
-        })}
-      </ul>
+      <ul class="main_list">{htmlClubList()}</ul>
       <h1>Añadir nuevo club</h1>
       <form className="form">
         <div className="first_club">
-          <label>Nombre del club</label>
+          <label htmlFor="">Nombre del club</label>
           <input
             type="text"
             name="name"
@@ -60,12 +64,12 @@ function App() {
           />
         </div>
         <div className="first_club">
-          <label>¿Abre entre semana?</label>
+          <label htmlFor="">¿Abre entre semana?</label>
           <input
             type="checkbox"
-            name="weekend"
-            id="weekend"
-            value={openWeekDays}
+            name="openOnWeekDays"
+            id="openOnWeekDays"
+            checked={openWeekDays}
             onChange={handleOpenWeekDays}
           />
         </div>
@@ -74,15 +78,17 @@ function App() {
           <label>¿Abre los fines de semana?</label>
           <input
             type="checkbox"
-            name="daily"
-            id="daily"
-            value={openWeekendDays}
+            name="openOnWeekend"
+            id="openOnWeekend"
+            checked={openWeekendDays}
             onChange={handleOpenWeekendDays}
           />
         </div>
 
         <input
           type="button"
+          name="btn"
+          id="btn"
           className="button"
           value="Añadir nuevo club"
           onClick={handleClickButton}
