@@ -25,6 +25,9 @@ function App() {
       openOnWeekend: openWeekendDays,
     };
     setData([...data, newContact]);
+    setNewName('');
+    setOpenWeekDays(false);
+    setOpenWeekendDays(false);
   };
   const htmlClubList = () => {
     return data.map((club, index) => {
