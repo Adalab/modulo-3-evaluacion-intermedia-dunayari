@@ -69,7 +69,8 @@ function App() {
     <div>
       <header>
         <h1>Mis clubs</h1>
-        <form action="">
+        <form action="" className="filter">
+          <label htmlFor="">Mostrar</label>
           <select value={allClubs} onChange={handleSearchClubs}>
             <option value="all">Todos</option>
             <option value="openWeekDays">Los que abren entre semana</option>
